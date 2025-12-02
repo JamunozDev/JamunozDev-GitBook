@@ -1,6 +1,6 @@
 # Table of contents
 
-* [JamunozDev-GitBook](README.md)
+* [Apuntes Practicas FP 2025](README.md)
 
 ## Tecnologías
 
