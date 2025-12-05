@@ -2,6 +2,9 @@
 
 * [Apuntes Practicas FP 2025](README.md)
 
+## LKS Gesitón de autorizaciones
+* [Análisis](LKS-gestion-autorizaciones/Análisis.md)
+
 ## Tecnologías
 
 * [JavaScript](tecnologias/javascript.md)
