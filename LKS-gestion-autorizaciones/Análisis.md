@@ -27,3 +27,10 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 |ID				|Sí	|VARCHAR2(3 BYTE)	|No			|					|Identificador de la vía de acceso correspondiente a la aplicación de extranjería|
 |DES_VIA_ACCESO	|	|VARCHAR2(300 CHAR)	|No			|					|Descripción identificativa de la vía de acceso (supuesto)                       |
 
+## La tabla LGA_AUTORIZACIONES tendrá la siguiente estructura:
+
+|CAMPO		|PK	|TIPO	            |NULLABLE	|VALOR POR DEFECTO	|COMENTARIO                                                   |
+|-----------|---|-------------------|-----------|------------------|--------------------------------------------------------------|
+|COD_MEYSS	|Sí	|VARCHAR2(6 BYTE)	|No		    |                  |  Código del MEYSS de identificación de la autorización       |
+|ID_PERMISO	|	|VARCHAR2(3 BYTE)	|No		    |                  |  Código de permiso relacionado con la tabla LGA_PERMISOS     |
+|VIA		|	|VARCHAR2(3 BYTE)	|No		    |                  |  Vía de acceso correspondiente a la aplicación de extranjería|
