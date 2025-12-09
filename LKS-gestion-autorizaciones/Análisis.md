@@ -20,4 +20,10 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 | MESES_VALIDEZ |  | NUMBER | Sí |  | Meses validez del Permiso |
 | REGLAMENTO |  | VARCHAR2(11 BYTE) | Sí |  | Reglamento por defecto de la autorización |
 
+## La tabla LGA_VIA_ACCESO tendrá la siguiente estructura:
+
+|CAMPO			|PK	|TIPO				|NULLABLE	|VALOR POR DEFECTO	|COMENTARIO																		 |
+|---------------|---|-------------------|-----------|-------------------|--------------------------------------------------------------------------------|
+|ID				|Sí	|VARCHAR2(3 BYTE)	|No			|					|Identificador de la vía de acceso correspondiente a la aplicación de extranjería|
+|DES_VIA_ACCESO	|	|VARCHAR2(300 CHAR)	|No			|					|Descripción identificativa de la vía de acceso (supuesto)                       |
 
