@@ -33,4 +33,5 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 |-----------|---|-------------------|-----------|------------------|--------------------------------------------------------------|
 |COD_MEYSS	|Sí	|VARCHAR2(6 BYTE)	|No		    |                  |  Código del MEYSS de identificación de la autorización       |
 |ID_PERMISO	|	|VARCHAR2(3 BYTE)	|No		    |                  |  Código de permiso relacionado con la tabla LGA_PERMISOS     |
-|VIA		|	|VARCHAR2(3 BYTE)	|No		    |                  |  Vía de acceso correspondiente a la aplicación de extranjería|
+|ID_VIA		|	|VARCHAR2(3 BYTE)	|No		    |                  |  Vía de acceso correspondiente a la aplicación de extranjería|
+|ID_MODELO  |   |VARCHAR2(4 BYTE)   |No         |                  | Identificador del modelo de formulario a rellenar para solicitar esta autorización|
