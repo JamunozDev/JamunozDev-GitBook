@@ -35,3 +35,5 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 |ID_PERMISO	|	|VARCHAR2(3 BYTE)	|No		    |                  |  Código de permiso relacionado con la tabla LGA_PERMISOS     |
 |ID_VIA		|	|VARCHAR2(3 BYTE)	|No		    |                  |  Vía de acceso correspondiente a la aplicación de extranjería|
 |ID_MODELO  |   |VARCHAR2(4 BYTE)   |No         |                  | Identificador del modelo de formulario a rellenar para solicitar esta autorización|
+|NUM_PLAZO  |   |NUMBER             |Sí         |                  | Número del plazo|
+|TIPO_PLAZO |   |VARCHAR2(1 BYTE)   |Sí         |                  | Tipo de plazo: D - Días, M - Meses, A - Años|
