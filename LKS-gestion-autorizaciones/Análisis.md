@@ -25,7 +25,7 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 |CAMPO			|PK	|TIPO				|NULLABLE	|VALOR POR DEFECTO	|COMENTARIO																		 |
 |---------------|---|-------------------|-----------|-------------------|--------------------------------------------------------------------------------|
 |ID				|Sí	|VARCHAR2(3 BYTE)	|No			|					|Identificador de la vía de acceso correspondiente a la aplicación de extranjería|
-|DES_VIA_ACCESO	|	|VARCHAR2(300 CHAR)	|No			|					|Descripción identificativa de la vía de acceso (supuesto)                       |
+|DES_VIA_ACCESO	|	|VARCHAR2(300 CHAR)	|Sí			|					|Descripción identificativa de la vía de acceso (supuesto)                       |
 
 ## La tabla LGA_AUTORIZACIONES tendrá la siguiente estructura:
 
@@ -37,3 +37,4 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 |ID_MODELO  |   |VARCHAR2(4 BYTE)   |No         |                  | Identificador del modelo de formulario a rellenar para solicitar esta autorización|
 |NUM_PLAZO  |   |NUMBER             |Sí         |                  | Número del plazo|
 |TIPO_PLAZO |   |VARCHAR2(1 BYTE)   |Sí         |                  | Tipo de plazo: D - Días, M - Meses, A - Años|
+|SILENCIO   |   |VARCHAR2(1 BYTE)   |Sí         |                  | Sentido del silencio: P - Positivo, N - Negativo|
