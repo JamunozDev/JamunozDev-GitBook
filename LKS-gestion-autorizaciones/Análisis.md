@@ -10,15 +10,15 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 
 ## La tabla LGA_PERMISOS tendrá la siguiente estructura:
 
-| CAMPO | PK | TIPO | NULLABLE | VALOR POR DEFECTO | COMENTARIO |
-|-------|----|------|----------|-------------------|------------|
-| ID | Sí | VARCHAR2(3 BYTE) | No |  | Código de permiso correspondiente a la aplicación de extranjería |
-| DES_PERMISO |  | VARCHAR2(300 CHAR) | No |  | Descripción identificativa del permiso |
-| LUCRATIVO |  | VARCHAR2(1 BYTE) | No | ‘N’ | Lucrativo (S/N) |
-| RESIDENCIA |  | VARCHAR2(1 BYTE) | Sí | ‘N’ | Es permiso de residencia |
-| VIA_DEFECTO |  | VARCHAR2(3 BYTE) | Sí |  | Vía por defecto al abrir |
-| MESES_VALIDEZ |  | NUMBER | Sí |  | Meses validez del Permiso |
-| REGLAMENTO |  | VARCHAR2(11 BYTE) | Sí |  | Reglamento por defecto de la autorización |
+| CAMPO | PK | TIPO | NULLABLE | VALOR POR DEFECTO | COMENTARIO | CAMPO EXCEL |
+|-------|----|------|----------|-------------------|------------|-------------|
+| ID | Sí | VARCHAR2(3 BYTE) | No |  | Código de permiso correspondiente a la aplicación de extranjería ||
+| DES_PERMISO |  | VARCHAR2(300 CHAR) | No |  | Descripción identificativa del permiso ||
+| LUCRATIVO |  | VARCHAR2(1 BYTE) | No | ‘N’ | Lucrativo (S/N) ||
+| RESIDENCIA |  | VARCHAR2(1 BYTE) | Sí | ‘N’ | Es permiso de residencia ||
+| VIA_DEFECTO |  | VARCHAR2(3 BYTE) | Sí |  | Vía por defecto al abrir ||
+| MESES_VALIDEZ |  | NUMBER | Sí |  | Meses validez del Permiso ||
+| REGLAMENTO |  | VARCHAR2(11 BYTE) | Sí |  | Reglamento por defecto de la autorización |NORMATIVA primera parte antes de la /|
 
 ## La tabla LGA_VIA_ACCESO tendrá la siguiente estructura:
 
@@ -29,12 +29,14 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 
 ## La tabla LGA_AUTORIZACIONES tendrá la siguiente estructura:
 
-|CAMPO		|PK	|TIPO	            |NULLABLE	|VALOR POR DEFECTO	|COMENTARIO                                                   |
-|-----------|---|-------------------|-----------|------------------|--------------------------------------------------------------|
-|COD_MEYSS	|Sí	|VARCHAR2(6 BYTE)	|No		    |                  |  Código del MEYSS de identificación de la autorización       |
-|ID_PERMISO	|	|VARCHAR2(3 BYTE)	|No		    |                  |  Código de permiso relacionado con la tabla LGA_PERMISOS     |
-|ID_VIA		|	|VARCHAR2(3 BYTE)	|No		    |                  |  Vía de acceso correspondiente a la aplicación de extranjería|
-|ID_MODELO  |   |VARCHAR2(4 BYTE)   |No         |                  | Identificador del modelo de formulario a rellenar para solicitar esta autorización|
-|NUM_PLAZO  |   |NUMBER             |Sí         |                  | Número del plazo|
-|TIPO_PLAZO |   |VARCHAR2(1 BYTE)   |Sí         |                  | Tipo de plazo: D - Días, M - Meses, A - Años|
-|SILENCIO   |   |VARCHAR2(1 BYTE)   |Sí         |                  | Sentido del silencio: P - Positivo, N - Negativo|
+|CAMPO		|PK	|TIPO	            |NULLABLE	|VALOR POR DEFECTO	|COMENTARIO                                                    |CAMPO EXCEL|
+|-----------|---|-------------------|-----------|------------------|---------------------------------------------------------------|-----------|
+|COD_MEYSS	|Sí	|VARCHAR2(6 BYTE)	|No		    |                  |  Código del MEYSS de identificación de la autorización        |           |
+|ID_PERMISO	|	|VARCHAR2(3 BYTE)	|No		    |                  |  Código de permiso relacionado con la tabla LGA_PERMISOS      |           |
+|ID_VIA		|	|VARCHAR2(3 BYTE)	|No		    |                  |  Vía de acceso correspondiente a la aplicación de extranjería |           |
+|ID_MODELO  |   |VARCHAR2(4 BYTE)   |No         |                  | Identificador del modelo de formulario a rellenar para solicitar esta autorización||
+|NUM_PLAZO  |   |NUMBER             |Sí         |                  | Número del plazo                                                                  ||
+|TIPO_PLAZO |   |VARCHAR2(1 BYTE)   |Sí         |                  | Tipo de plazo: D - Días, M - Meses, A - Años                                      ||
+|SILENCIO   |   |VARCHAR2(1 BYTE)   |Sí         |                  | Sentido del silencio: P - Positivo, N - Negativo                                  ||
+|EPIGRAFE_TASA_052||VARCHAR2(7 BYTE)|Sí         |                  | Epigrafe o check a marcar en el impreso de la tasa 052 (para usar en escritos)    |TASA 052|
+|EPIGRAFE_TASA_062||VARCHAR2(7 BYTE)|Sí         |                  | Epigrafe o check a marcar en el impreso de la tasa 062 (para usar en escritos)    |TASA 062|
