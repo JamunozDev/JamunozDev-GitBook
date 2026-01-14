@@ -41,3 +41,4 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 |EPIGRAFE_TASA_052||VARCHAR2(7 BYTE)|Sí         |                  | Epigrafe o check a marcar en el impreso de la tasa 052 (para usar en escritos)    |TASA 052|
 |EPIGRAFE_TASA_062||VARCHAR2(7 BYTE)|Sí         |                  | Epigrafe o check a marcar en el impreso de la tasa 062 (para usar en escritos)    |TASA 062|
 |DOS_VECES_SMI| |VARCHAR2(1 BYTE)   |Sí         |                  | TASA 062 2 VECES SMI: S - Sí, N - No                                              |TASA 062 2 VECES SMI|
+|AUTORIZA_TRABAJAR| |VARCHAR2(1 BYTE)|Sí        |                  | Autoriza a trabajar: S - Sí, N - No, I - Instrucciones, R - Resolución, P - Practicas, L - No autoriza a trabajar pero lleva datos laborales, A - Si/No|Autoriza a  TRABAJAR|
