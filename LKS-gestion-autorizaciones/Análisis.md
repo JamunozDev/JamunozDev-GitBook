@@ -29,16 +29,17 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 
 ## La tabla LGA_AUTORIZACIONES tendrá la siguiente estructura:
 
-|CAMPO		|PK	|TIPO	            |NULLABLE	|VALOR POR DEFECTO	|COMENTARIO                                                    |CAMPO EXCEL|
-|-----------|---|-------------------|-----------|------------------|---------------------------------------------------------------|-----------|
-|COD_MEYSS	|Sí	|VARCHAR2(6 BYTE)	|No		    |                  |  Código del MEYSS de identificación de la autorización        |           |
-|ID_PERMISO	|	|VARCHAR2(3 BYTE)	|No		    |                  |  Código de permiso relacionado con la tabla LGA_PERMISOS      |           |
-|ID_VIA		|	|VARCHAR2(3 BYTE)	|No		    |                  |  Vía de acceso correspondiente a la aplicación de extranjería |           |
-|ID_MODELO  |   |VARCHAR2(4 BYTE)   |No         |                  | Identificador del modelo de formulario a rellenar para solicitar esta autorización||
-|NUM_PLAZO  |   |NUMBER             |Sí         |                  | Número del plazo                                                                  ||
-|TIPO_PLAZO |   |VARCHAR2(1 BYTE)   |Sí         |                  | Tipo de plazo: D - Días, M - Meses, A - Años                                      ||
-|SILENCIO   |   |VARCHAR2(1 BYTE)   |Sí         |                  | Sentido del silencio: P - Positivo, N - Negativo                                  ||
-|EPIGRAFE_TASA_052||VARCHAR2(7 BYTE)|Sí         |                  | Epigrafe o check a marcar en el impreso de la tasa 052 (para usar en escritos)    |TASA 052|
-|EPIGRAFE_TASA_062||VARCHAR2(7 BYTE)|Sí         |                  | Epigrafe o check a marcar en el impreso de la tasa 062 (para usar en escritos)    |TASA 062|
-|DOS_VECES_SMI| |VARCHAR2(1 BYTE)   |Sí         |                  | TASA 062 2 VECES SMI: S - Sí, N - No                                              |TASA 062 2 VECES SMI|
-|AUTORIZA_TRABAJAR| |VARCHAR2(1 BYTE)|Sí        |                  | Autoriza a trabajar: S - Sí, N - No, I - Instrucciones, R - Resolución, P - Practicas, L - No autoriza a trabajar pero lleva datos laborales, A - Si/No|Autoriza a  TRABAJAR|
+|CAMPO		|PK	|TIPO	            |NULLABLE|VALOR POR DEFECTO|COMENTARIO                                                    |CAMPO EXCEL|
+|-----------|---|-------------------|--------|-----------------|---------------------------------------------------------------|-----------|
+|COD_MEYSS	|Sí	|VARCHAR2(6 BYTE)	|No		 |                 |  Código del MEYSS de identificación de la autorización        |           |
+|ID_PERMISO	|	|VARCHAR2(3 BYTE)	|No		 |                 |  Código de permiso relacionado con la tabla LGA_PERMISOS      |           |
+|ID_VIA		|	|VARCHAR2(3 BYTE)	|No		 |                 |  Vía de acceso correspondiente a la aplicación de extranjería |           |
+|ID_MODELO  |   |VARCHAR2(4 BYTE)   |No      |                 | Identificador del modelo de formulario a rellenar para solicitar esta autorización||
+|NUM_PLAZO  |   |NUMBER             |Sí      |                 | Número del plazo                                                                  ||
+|TIPO_PLAZO |   |VARCHAR2(1 BYTE)   |Sí      |                 | Tipo de plazo (D: Días - M: Meses - A: Años)                                      ||
+|SILENCIO   |   |VARCHAR2(1 BYTE)   |Sí      |                 | Sentido del silencio (P: Positivo - N: Negativo)                                  ||
+|EPIGRAFE_TASA_052||VARCHAR2(7 BYTE)|Sí      |                 | Epigrafe o check a marcar en el impreso de la tasa 052 (para usar en escritos)    |TASA 052|
+|EPIGRAFE_TASA_062||VARCHAR2(7 BYTE)|Sí      |                 | Epigrafe o check a marcar en el impreso de la tasa 062 (para usar en escritos)    |TASA 062|
+|DOS_VECES_SMI| |VARCHAR2(1 BYTE)   |Sí      |                 | TASA 062 2 VECES SMI (S: Sí - N: No)                                              |TASA 062 2 VECES SMI|
+|AUTORIZA_TRABAJAR||VARCHAR2(1 BYTE)|Sí      |                 | Autoriza a trabajar (S: Sí - N: No - I: Instrucciones - R: Resolución - P: Practicas - L: No autoriza a trabajar pero lleva datos laborales - A: Si/No)|Autoriza a  TRABAJAR|
+|DURACION         ||VARCHAR2(2 BYTE)|Sí      |                 |Duración (en meses) (DE: No especificado/Desconocido - 01, 02 …..12 ….: 1 mes, 2 meses, … 1 año … - CO: Condicionada - IN: Indefinida)|DURACIÓN Inicial Máxima (si no hay trabajo es la duración de la estancia o residencia)|
