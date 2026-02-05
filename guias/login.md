@@ -120,3 +120,188 @@ En layout.html (o fragments), mostrar links condicionales con sec:authorize.
     <a th:href="@{/login}">Login</a>
 </div>
 ```
+## Añadir persistencia al login
+Para añadir persistencia al login (en lugar de usuarios en memoria) hay que leer los usuarios desde la base de datos mediante JPA + UserDetailsService.
+### Entidad Usuario y Roles
+Definir una entidad User que implemente UserDetails o que pueda adaptar a UserDetails.
+```console
+@Entity
+@Table(name = "users")
+public class UserEntity {   // o implementar UserDetails si se desea
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String username;   // o email
+
+    @Column(nullable = false)
+    private String password;   // BCrypt
+
+    private boolean enabled = true;
+
+    // relación con roles
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles = new HashSet<>();
+}
+```
+```console
+@Entity
+@Table(name = "roles")
+public class RoleEntity {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
+    private String name;  // "ROLE_USER", "ROLE_ADMIN"
+}
+```
+### Repositorios JPA
+Usar Spring Data JPA para consultar usuarios por username/email.
+```console
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    Optional<UserEntity> findByUsername(String username); // o findByEmail
+}
+```
+### Adaptar Usuario a UserDetails
+Implementar UserDetails en la entidad o crear un wrapper. Ejemplo wrapper:
+```console
+public class CustomUserDetails implements UserDetails {
+
+    private final UserEntity user;
+
+    public CustomUserDetails(UserEntity user) {
+        this.user = user;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return user.getRoles().stream()
+            .map(r -> new SimpleGrantedAuthority(r.getName()))
+            .toList();
+    }
+
+    @Override
+    public String getPassword() { return user.getPassword(); }
+
+    @Override
+    public String getUsername() { return user.getUsername(); }
+
+    @Override
+    public boolean isAccountNonExpired() { return true; }
+
+    @Override
+    public boolean isAccountNonLocked() { return true; }
+
+    @Override
+    public boolean isCredentialsNonExpired() { return true; }
+
+    @Override
+    public boolean isEnabled() { return user.isEnabled(); }
+}
+```
+### Implementar UserDetailsService con JPA
+Esta clase carga el usuario desde la BD para que Spring Security lo use durante el login.
+```console
+@Service
+public class JpaUserDetailsService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    public JpaUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+
+        UserEntity user = userRepository.findByUsername(username)
+            .orElseThrow(() ->
+                new UsernameNotFoundException("Usuario no encontrado: " + username));
+
+        return new CustomUserDetails(user);
+    }
+}
+```
+### Configurar Security para usar la BD
+En SecurityConfig, inyectar UserDetailsService y PasswordEncoder (BCrypt) y dejar que DaoAuthenticationProvider se configure automáticamente.
+```console
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfig(JpaUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // ya lo estabas usando
+    }
+
+    @Bean
+    public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())  // según necesidad
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/login", "/register", "/css/**", "/js/**").permitAll()
+                .anyRequest().authenticated()
+            )
+            .userDetailsService(userDetailsService)
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+            )
+            .logout(logout -> logout.logoutSuccessUrl("/login?logout"));
+
+        return http.build();
+    }
+}
+```
+Con esto, cuando el usuario se loguea, Spring Security consulta la BD vía JpaUserDetailsService en lugar de InMemoryUserDetailsManager.
+### Registro de Usuarios (guardar con BCrypt)
+En el flujo de registro, codificar la contraseña antes de guardar el usuario.
+```console
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+
+    public UserService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
+    }
+
+    public UserEntity register(String username, String rawPassword) {
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(passwordEncoder.encode(rawPassword));
+        user.setEnabled(true);
+
+        RoleEntity userRole = roleRepository.findByName("ROLE_USER")
+            .orElseThrow();
+        user.getRoles().add(userRole);
+
+        return userRepository.save(user);
+    }
+}
+```
+El formulario de login Thymeleaf no cambia: sigue enviando username y password, pero ahora se validan contra la BD.
