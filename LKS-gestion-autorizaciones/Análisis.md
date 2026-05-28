@@ -8,6 +8,14 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 | ID             |	Sí | VARCHAR2(4 BYTE) |	No       | |Identificador del formulario (EX00, EX01, EX02, …) |
 | DES_MODELO | | VARCHAR2(300 CHAR) | No | | Descripción identificativa del modelo de formulario |
 
+## La tabla LGA_REGLAMENTOS tendrá la siguiente estructura:
+
+| NOMBRE COLUMNA |	PK |	TIPO          |	NULLABLE |	VALOR POR DEFECTO |	COMENTARIO |
+|----------------|-----|------------------|----------|--------------------|------------|
+| ID             | Sí  | VARCHAR2(11 BYTE)| No       |                    | Código del reglamento |
+| DES_REGLAMENTO |     | VARCHAR2(50 BYTE)| No       |                    | Descripción del reglamento |
+
+
 ## La tabla LGA_PERMISOS tendrá la siguiente estructura:
 
 | CAMPO | PK | TIPO | NULLABLE | VALOR POR DEFECTO | COMENTARIO | CAMPO EXCEL |
@@ -18,7 +26,7 @@ La arquitectura constara de las tablas LGA_MODELOS que recopilará todos los mod
 | RESIDENCIA |  | VARCHAR2(1 BYTE) | Sí | ‘N’ | Es permiso de residencia ||
 | VIA_DEFECTO |  | VARCHAR2(3 BYTE) | Sí |  | Vía por defecto al abrir ||
 | MESES_VALIDEZ |  | NUMBER | Sí |  | Meses validez del Permiso ||
-| REGLAMENTO |  | VARCHAR2(11 BYTE) | Sí |  | Reglamento por defecto de la autorización |NORMATIVA primera parte antes de la /|
+| REGLAMENTO |  | VARCHAR2(11 BYTE) | Sí |  | Código del Reglamento por defecto de la autorización |NORMATIVA primera parte antes de la /|
 
 ## La tabla LGA_VIA_ACCESO tendrá la siguiente estructura:
 
